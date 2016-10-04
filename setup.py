@@ -8,7 +8,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = '0.1.0'
+version = '0.1'
 
 if sys.argv[-1] == 'publish':
     try:
@@ -33,11 +33,12 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 setup(
     name='django-tvml',
     version=version,
-    description="""Django app for generating TVML templates""",
+    description="""A very thin Django app for rendering TVML templates.""",
     long_description=readme + '\n\n' + history,
     author='Gene Sluder',
     author_email='gene@gobiko.com',
     url='https://github.com/genesluder/django-tvml',
+    download_url = 'https://github.com/genesluder/django-tvml/tarball/0.1',
     packages=[
         'tvml',
     ],
