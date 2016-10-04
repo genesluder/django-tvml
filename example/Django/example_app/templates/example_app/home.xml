@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+{% load static %}
+<document>
+  <head>
+    <style>
+    .showTextOnHighlight {
+      tv-text-highlight-style: show-on-highlight;
+    }
+    .5ColumnGrid {
+      tv-interitem-spacing: 50;
+    }
+    </style>
+  </head>
+  <stackTemplate>
+    <collectionList>
+      {% for collection in object_list %}
+        {% if collection.featured %}
+      <carousel>
+        <section>
+          {% for video in collection.videos.all %}
+          <lockup documentURL="{% url 'video-detail' video.id %}">
+            <img src="{% get_media_prefix %}{{ video.feature_image }}" width="1504" height="944" />
+          </lockup>
+          {% endfor %}
+        </section>
+      </carousel>
+        {% else %}
+      <shelf class="5ColumnGrid">
+        <header>
+          <title>{{ collection.title }}</title>
+        </header>
+        <section>
+        {% for video in collection.videos.all %}
+        <lockup documentURL="{% url 'video-detail' video.id %}">
+          <img src="{% get_media_prefix %}{{ video.cover_image }}" width="300" height="360" />
+          <title>{{ video.title }}</title>
+          <subtitle>{{ video.subtitle }}</subtitle>
+        </lockup>
+        {% endfor %}
+        </section>
+      </shelf>
+        {% endif %}
+      {% endfor %}
+    </collectionList>
+  </stackTemplate>
+</document>
+

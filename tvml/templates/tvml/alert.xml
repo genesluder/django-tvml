@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <alertTemplate>
+        {% if background_image %}
+        <background>
+            <img src="{{ background_image }}" />
+        </background>
+        {% endif %}
+        <title>{{ title|default:"Title" }}</title>
+        {% if description %}
+        <description>{{ description }}</description>
+        {% endif %}
+        {% for button in buttons %}
+        <button{% if button.disabled %} disabled="true"{% endif %}{% if button.highlight %} autoHighlight="true"{% endif %}>
+            <text>{{ button.title }}</text>
+            {% if button.badge %}
+                <badge src="{{ button.badge }}" style="margin:0 -20 0 20;" />
+            {% endif %}
+        </button>
+        {% endfor %}
+    </alertTemplate>
+</document>

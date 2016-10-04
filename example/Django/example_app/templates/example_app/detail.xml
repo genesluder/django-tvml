@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+{% load example_app_tags static %}
+<document>
+  <head>
+    <style>
+    .showTextOnHighlight {
+      tv-text-highlight-style: show-on-highlight;
+    }
+    .badge {
+      tv-tint-color: rgb(0,0,0);
+    }
+    .9ColumnGrid {
+      tv-interitem-spacing: 51;
+    }
+    </style>
+  </head>
+  <productTemplate theme="light">
+
+    <banner>
+      <infoList>
+      </infoList>
+      <stack>
+        <title>{{ object.title }}</title>
+        <row>
+          <text>{{ object.length }}</text>
+        </row>
+        <description allowsZooming="true">{{ object.description }}</description>
+        <row>
+          <buttonLockup videoURL="{{ object.video }}">
+            <badge src="resource://button-play" />
+            <title>Watch</title>
+          </buttonLockup>
+        </row>
+      </stack>
+      <img src="{% get_media_prefix %}{{ object.cover_image }}" width="600" height="720" />
+    </banner>
+    <shelf class="9ColumnGrid">
+      <header>
+        <title>More like this</title>
+      </header>
+      <section>
+        {% get_related_videos object as related %}
+        {% for video in related %}
+        <lockup documentURL="{% url 'video-detail' video.id %}">
+          <img src="{% get_media_prefix %}{{ video.cover_image }}" width="300" height="360" />
+          <title>{{ video.title }}</title>
+        </lockup>
+        {% endfor %}
+      </section>
+    </shelf>
+  </productTemplate>
+</document>
