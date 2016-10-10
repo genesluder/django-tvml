@@ -5,14 +5,6 @@ django-tvml
 Includes an example Django project and Apple TV app. 
 
 
-Installation
------------------
-
-Installing is easy with pip::
-
-    pip install django-tvml
-
-
 Usage
 -----------------
 
